@@ -5,13 +5,15 @@ class CounterBloc {
   int _counter = 0;
 
   final _counterStateController = StreamController<int>();
-  StreamSink<int> get _inCounter => _counterStateController.sink;
-  Stream<int> get counter => _counterStateController.stream;
+
+  StreamSink<int> get _inCounter => _counterStateController.sink; //  input
+
+  Stream<int> get counter => _counterStateController.stream;  //  output
 
   final _counterEventController = StreamController<CounterEvent>();
   Sink<CounterEvent> get counterEventSink => _counterEventController.sink;
 
-  CounterBloc() {
+  CounterBloc() { //  listener
     _counterEventController.stream.listen(_mapEventToState);
   }
 
